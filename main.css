@@ -1,0 +1,17 @@
+#app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+@media (min-width: 1024px) {
+
+  #app {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 0;
+  }
+}

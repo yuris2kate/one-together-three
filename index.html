@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feliz 1 Ano de Namoro - Kate</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Vue.js -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <link rel="stylesheet" href="button.css">
+  <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="main.css">
+  <style>
+    body {
+      /* Fundo de imagem */
+      background-image: url("./assets/kawaii.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .timeline {
+      display: flex;
+      width: 1200px;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .bg-purple{
+      background-color: rgb(179, 183, 234, 0.95);
+      box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2);
+      width: calc(100% - 100px);
+      border-radius: 20px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      width: 4px;
+      background-color: #007bff;
+      top: 100px;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: -1;
+    }
+
+    .timeline-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+      margin-top: 20px;
+    }
+
+    .timeline-item:first-of-type {
+      margin-top: 0;
+    }
+
+    .timeline-item:nth-child(odd):before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: calc(50% - 7px);
+      width: 14px;
+      height: 14px;
+      background: rgba(233, 33, 99, 1);
+      border-radius: 50%;
+      border: 2px solid white;
+      box-shadow: 0 0 0 3px rgba(233, 33, 99, 0.2);
+      z-index: 1;
+    }
+
+    .timeline-item:nth-child(even):before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: calc(50% - 7px);
+      width: 14px;
+      height: 14px;
+      background: rgba(233, 33, 99, 1);
+      border-radius: 50%;
+      border: 2px solid white;
+      box-shadow: 0 0 0 3px rgba(233, 33, 99, 0.2);
+      z-index: 1;
+    }
+
+    .timeline-item:nth-child(odd) {
+      padding-left: calc(50% + 30px);
+      justify-content: flex-start;
+      text-align: left;
+    }
+
+    .timeline-item:nth-child(even) {
+      padding-right: calc(50% + 30px);
+      flex-direction: row-reverse;
+      justify-content: flex-start;
+      text-align: left;
+    }
+
+    .timeline-content {
+      display: flex;
+      flex-direction: column;
+      max-width: calc(80% - 70px);
+      font-size: 1.2rem;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .timeline-item:nth-child(even) .timeline-content {
+      order: 1;
+    }
+    .timeline-item:nth-child(even) .timeline-img-container {
+      order: 2;
+      margin-left: 20px;
+      margin-right: 0;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-img-container {
+      margin-right: 20px;
+      margin-left: 0;
+    }
+
+    .timeline-content p {
+      white-space: pre-line;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-img {
+      width: 80px;
+      height: 80px;
+      cursor: pointer;
+      overflow: hidden;
+      background-color: white;
+      border: 3px solid #007bff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .image-preview {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .image-preview img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+    }
+
+    .timeline-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+
+.btn-group-kawaii {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-kawaii {
+  background: linear-gradient(135deg, #f9c5d1, #ffc9de);
+  border: none;
+  padding: 10px 24px;
+  border-radius: 18px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-weight: bold;
+  color: #822659;
+  box-shadow: 0 6px 0 #f473a1, 0 0 12px rgba(255, 192, 203, 0.6);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  user-select: none;
+}
+
+.btn-kawaii:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 12px rgba(255, 192, 203, 0.8);
+}
+
+.btn-kawaii:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 0 4px 0 #f473a1;
+}
+
+.btn-kawaii:disabled {
+  background: #e7c8d4;
+  color: #a17486;
+  box-shadow: none;
+  cursor: default;
+}
+
+.carregar-todas-btn {
+  background: linear-gradient(135deg, #d4c1f9, #c1b8f9);
+  color: #4b2f97;
+  box-shadow: 0 6px 0 #8a76d9, 0 0 14px rgba(193, 184, 249, 0.7);
+}
+
+.carregar-todas-btn:hover:not(:disabled) {
+  box-shadow: 0 10px 14px rgba(193, 184, 249, 0.9);
+}
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="container-fluid d-flex flex-column justify-content-center align-items-center">
+      <nav class="navbar">
+        <div class="menu mt-3">
+          <a href="https://one-together.vercel.app/home" class="big-button me-3">Home <img class="emojiMenu" src="./assets/house.png" alt="Imagem" /> </a>
+          <a href="https://one-together.vercel.app/momentos" class="big-button me-3">Momentos <img class="emojiMenu" src="./assets/graph.png" alt="Imagem" /> </a>
+          <a href="https://one-together.vercel.app/whatsapp" class="big-button me-3">Whatsapp <img class="emojiMenu" src="./assets/contact.png" alt="Imagem" /> </a>
+          <a href="https://one-together.vercel.app/enigma9" class="big-button me-3">Presente <img class="emojiMenu" src="./assets/friends.png" alt="Imagem" /> </a>
+        </div>
+      </nav>
+      <div class="timeline bg-purple mt-5 d-flex">
+         <!-- Botões kawaii -->
+      <div class="btn-group-kawaii my-3 d-flex gap-3">
+          <a
+            href="https://one-together.vercel.app/momentos"
+            :disabled="false"
+            class="btn-kawaii text-decoration-none"
+          >
+            Parte 1
+        </a>
+        <a
+          href="https://yuris2kate.github.io/oneyear-together/"
+          :disabled="false"
+          class="btn-kawaii"
+        >
+          Parte 2
+      </a>
+        <button
+          :disabled="true"
+          class="btn-kawaii"
+        >
+          Parte 3
+      </button>
+        <button @click="carregarTodas" class="btn-kawaii carregar-todas-btn">
+          Carregar todas!
+        </button>
+      </div>
+        <h2 class="text-center my-4">Linha do Tempo ({{ totalEvents }})</h2>
+        
+        <!-- Image Preview Modal -->
+        <div v-if="currentPreviewImage" class="image-preview">
+          <button class="close-btn" @click="hideImagePreview">&times;</button>
+          <img :src="currentPreviewImage" alt="Preview" />
+        </div>
+        
+        <div
+          v-for="(event, index) in visibleEvents"
+          :key="index"
+          class="timeline-item"
+        >
+          <div class="timeline-content">
+            <div
+              class="timeline-img"
+              @click="showImagePreview(index, event.image)"
+            >
+              <img :src="event.image" alt="Evento" class="img-fluid" />
+            </div>
+            <p>{{ event.description }}</p>
+            <h5 class="timeline-date">{{ event.date }}</h5>
+          </div>
+        </div>
+      </div>
+
+      <div v-if="loading" class="text-center my-3">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Carregando...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    const { createApp, ref, computed, onMounted } = Vue;
+    
+    createApp({
+      setup() {
+        // Mock data - substitua com seu JSON real
+        const mockData = [];
+        
+        const allEvents = ref(mockData.map(m => ({
+          ...m,
+          image: m.image // No CDN version, we use direct URLs
+        })));
+
+        // Função para ordenação
+        const parseDate = (dateString) => {
+          const [day, month, year] = dateString.split('/');
+          return new Date(`${year}-${month}-${day}`);
+        };
+
+        // Ordenar os eventos
+        allEvents.value = allEvents.value.sort((a, b) => {
+          return parseDate(a.date) - parseDate(b.date);
+        });
+
+        const visibleCount = ref(5);
+        const loading = ref(false);
+        const currentPreviewImage = ref(null);
+
+        // Lista de eventos visíveis
+        const visibleEvents = computed(() =>
+          allEvents.value.slice(0, visibleCount.value)
+        );
+
+        // Função para carregar mais eventos ao rolar a página
+        const loadMoreEvents = () => {
+          if (loading.value || visibleCount.value >= allEvents.value.length) return;
+
+          loading.value = true;
+          setTimeout(() => {
+            visibleCount.value = Math.min(
+              visibleCount.value + 5,
+              allEvents.value.length
+            );
+            loading.value = false;
+          }, 2000);
+        };
+
+        // Função para carregar todas as imagens de uma vez
+        const carregarTodas = () => {
+          if (visibleCount.value >= allEvents.value.length) return;
+
+          loading.value = true;
+          setTimeout(() => {
+            visibleCount.value = allEvents.value.length;
+            loading.value = false;
+          }, 100);
+        };
+
+        const totalEvents = computed(() => allEvents.value.length);
+
+        // Detecta o scroll e carrega mais eventos quando o usuário chega perto do final
+        const handleScroll = () => {
+          if (
+            window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 &&
+            !loading.value &&
+            visibleCount.value < allEvents.value.length
+          ) {
+            loadMoreEvents();
+          }
+        };
+
+        // Adiciona o evento de scroll quando o componente é montado
+        onMounted(() => {
+          window.addEventListener("scroll", handleScroll);
+        });
+
+        return {
+          allEvents,
+          visibleCount,
+          loading,
+          visibleEvents,
+          totalEvents,
+          currentPreviewImage,
+          loadMoreEvents,
+          carregarTodas,
+          showImagePreview: (index, image) => {
+            currentPreviewImage.value = image;
+          },
+          hideImagePreview: () => {
+            currentPreviewImage.value = null;
+          }
+        };
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
