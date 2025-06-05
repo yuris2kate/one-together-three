@@ -281,19 +281,128 @@
   }
 }
 
+/*______________________________________*/
+
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.menu-desktop,
+.menu-mobile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Botões com texto (desktop) */
+.menu-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  text-decoration: none;
+  background: #f0f0f0;
+  border-radius: 12px;
+  font-family: "Comic Sans MS", cursive;
+  font-weight: bold;
+  color: #333;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+}
+
+.menu-button img {
+  width: 24px;
+  height: 24px;
+}
+
+/* Ícones (mobile) */
+.icon-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f0f0f0;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.icon-button img {
+  width: 24px;
+  height: 24px;
+}
+
+.icon-button:hover {
+  transform: scale(1.1);
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+  .menu-desktop {
+    display: none;
+  }
+
+  .menu-mobile {
+    display: flex;
+  }
+}
+
+@media (min-width: 769px) {
+  .menu-mobile {
+    display: none;
+  }
+}
+
   </style>
 </head>
 <body>
   <div id="app">
     <div class="container-fluid d-flex flex-column justify-content-center align-items-center">
       <nav class="navbar">
-        <div class="menu mt-3">
-          <a href="https://one-together.vercel.app/home" class="big-button me-3">Home <img class="emojiMenu" src="./assets/house.png" alt="Imagem" /> </a>
-          <a href="https://one-together.vercel.app/momentos" class="big-button me-3">Momentos <img class="emojiMenu" src="./assets/graph.png" alt="Imagem" /> </a>
-          <a href="https://one-together.vercel.app/whatsapp" class="big-button me-3">Whatsapp <img class="emojiMenu" src="./assets/contact.png" alt="Imagem" /> </a>
-          <a href="https://one-together.vercel.app/enigma9" class="big-button me-3">Presente <img class="emojiMenu" src="./assets/friends.png" alt="Imagem" /> </a>
-        </div>
-      </nav>
+  <!-- Menu Desktop -->
+  <div class="menu-desktop">
+    <a href="https://one-together.vercel.app/home" class="big-button">
+      <img src="./assets/house.png" alt="Home" />
+      <span>Home</span>
+    </a>
+    <a href="https://one-together.vercel.app/momentos" class="big-button">
+      <img src="./assets/graph.png" alt="Momentos" />
+      <span>Momentos</span>
+    </a>
+    <a href="https://one-together.vercel.app/whatsapp" class="big-button">
+      <img src="./assets/contact.png" alt="Whatsapp" />
+      <span>Whatsapp</span>
+    </a>
+    <a href="https://one-together.vercel.app/enigma9" class="big-button">
+      <img src="./assets/friends.png" alt="Presente" />
+      <span>Presente</span>
+    </a>
+  </div>
+
+  <!-- Menu Mobile -->
+  <div class="menu-mobile">
+    <a href="https://one-together.vercel.app/home" class="icon-button">
+      <img src="./assets/house.png" alt="Home" />
+    </a>
+    <a href="https://one-together.vercel.app/momentos" class="icon-button">
+      <img src="./assets/graph.png" alt="Momentos" />
+    </a>
+    <a href="https://one-together.vercel.app/whatsapp" class="icon-button">
+      <img src="./assets/contact.png" alt="Whatsapp" />
+    </a>
+    <a href="https://one-together.vercel.app/enigma9" class="icon-button">
+      <img src="./assets/friends.png" alt="Presente" />
+    </a>
+  </div>
+</nav>
+
       <div class="timeline bg-purple mt-5 d-flex">
          <!-- Botões kawaii -->
       <div class="btn-group-kawaii my-3 d-flex gap-3">

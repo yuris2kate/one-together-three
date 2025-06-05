@@ -1,17 +1,17 @@
-.menu {
+.menu-desktop {
     display: flex;
     width: 1200px;
     justify-content: center;
   }
   
   /* Estilos para os botões (opcional, caso queira personalizar) */
-  .menu .button {
+  .menu-desktop .button {
     padding: 10px 20px;
     font-size: 1rem;
     border-radius: 25px;
     transition: background-color 0.3s ease;
   }
   
-  .menu .button:hover {
+  .menu-desktop .button:hover {
     background-color: var(--colorShadeD); /* Cor ao passar o mouse */
   }
