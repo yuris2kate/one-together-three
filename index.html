@@ -241,6 +241,46 @@
 .carregar-todas-btn:hover:not(:disabled) {
   box-shadow: 0 10px 14px rgba(193, 184, 249, 0.9);
 }
+
+@media (max-width: 768px) {
+  .timeline {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .timeline::before {
+    left: 20px;
+    transform: none;
+  }
+
+  .timeline-item {
+    flex-direction: row;
+    justify-content: flex-start !important;
+    padding: 10px 0 10px 50px !important;
+    text-align: left !important;
+  }
+
+  .timeline-item::before {
+    left: 20px !important;
+    right: auto !important;
+  }
+
+  .timeline-img-container,
+  .timeline-content {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+
+  .timeline-content {
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .timeline-img {
+    margin: 0 0 10px 0 !important;
+  }
+}
+
   </style>
 </head>
 <body>
